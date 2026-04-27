@@ -788,7 +788,97 @@ body::after {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-@media (max-width: 640px) {
+/* ── Stats animados ── */
+@keyframes countUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.stat-value { animation: countUp .4s ease; }
+
+/* ── Skeleton loading ── */
+.skeleton {
+  background: linear-gradient(90deg, var(--elevated) 25%, var(--border) 50%, var(--elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+  height: 14px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.skeleton-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 80px 110px;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(31,31,53,0.7);
+  gap: 12px;
+}
+
+/* ── File row barra lateral colorida ── */
+.file-row { position: relative; padding-left: 20px !important; }
+.file-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--border-hi);
+  transition: background .2s;
+}
+.file-row.bad-file::before  { background: var(--warn); box-shadow: 0 0 6px var(--warn); }
+.file-row.good-file::before { background: var(--ok); }
+.file-row:hover::before     { opacity: 1; }
+
+/* ── Chat msg avatar melhorado ── */
+.msg-av {
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* ── Barra API key atualizada para Gemini ── */
+.api-key-bar { background: rgba(66,133,244,0.06); border-bottom-color: rgba(66,133,244,0.25); }
+.api-key-bar input { border-color: rgba(66,133,244,0.35); }
+.api-key-bar input:focus { border-color: #4285F4; }
+.api-key-bar button { background: rgba(66,133,244,0.15); color: #4285F4; border-color: rgba(66,133,244,0.3); }
+.api-key-label { color: #4285F4; }
+
+/* ── Badge Gemini ── */
+.chat-model-badge { background: rgba(66,133,244,0.12); border-color: rgba(66,133,244,0.25); color: #4285F4; }
+
+/* ── WhatsApp dot pulsa quando Drive conectado ── */
+.wa-dot.on { box-shadow: 0 0 0 0 rgba(0,230,118,0.4); animation: waPulse 2s infinite, blink 2s infinite; }
+@keyframes waPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0,230,118,0.4); }
+  70%  { box-shadow: 0 0 0 8px rgba(0,230,118,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,230,118,0); }
+}
+
+/* ── Botão Só Ruins com badge contador ── */
+#btnShowBad { position: relative; }
+.bad-count {
+  position: absolute;
+  top: -6px; right: -6px;
+  background: var(--warn);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  display: none;
+}
+.bad-count.visible { display: flex; }
+
+/* ── Header progress bar ── */
+.header-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #7c3aed);
+  width: 0%;
+  transition: width .3s ease;
+  z-index: 999;
+  display: none;
+}
+.header-progress.active { display: block; }
+
   .files-head, .file-row { grid-template-columns: 1fr 70px 100px; }
   .files-head .col-date, .file-date { display: none; }
   .header-title { font-size: 22px; }
@@ -803,6 +893,7 @@ body::after {
 </head>
 <body>
 
+<div class="header-progress" id="headerProgress"></div>
 <div class="app">
 
   <header class="header">
@@ -813,7 +904,7 @@ body::after {
         <div class="header-meta">DRIVE MANAGER · PROJETO LUCAS · ABRIL 2026</div>
       </div>
     </div>
-    <div class="header-version">V 5.0</div>
+    <div class="header-version">V 6.0</div>
   </header>
 
   <div class="login-card" id="loginCard">
@@ -877,7 +968,7 @@ body::after {
         </select>
       </div>
       <button class="btn btn-ghost"  id="btnRefresh">↺ Atualizar</button>
-      <button class="btn btn-danger" id="btnShowBad">⚠ Só ruins</button>
+      <button class="btn btn-danger" id="btnShowBad">⚠ Só ruins<span class="bad-count" id="badCount"></span></button>
       <button class="btn btn-ghost"  id="btnShowAll">≡ Todos</button>
     </div>
     <div class="files-panel" id="filesPanel">
@@ -902,14 +993,14 @@ body::after {
       <div class="chat-header">
         <div class="chat-header-dot"></div>
         <div class="chat-header-title">CÉREBRO DEUS IA</div>
-        <div class="chat-model-badge">claude-sonnet-4-5</div>
+        <div class="chat-model-badge">gemini-2.0-flash</div>
         <div class="chat-header-sub" id="chatDriveStatus">Drive não conectado</div>
       </div>
 
       <!-- Barra de API Key -->
       <div class="api-key-bar" id="apiKeyBar">
-        <span class="api-key-label">API KEY</span>
-        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off">
+        <span class="api-key-label">GEMINI KEY</span>
+        <input type="password" id="apiKeyInput" placeholder="AIzaSy... (Google AI Studio)" autocomplete="off">
         <button onclick="Chat.saveKey()">💾 Salvar</button>
       </div>
 
@@ -917,13 +1008,13 @@ body::after {
         <div class="msg ai">
           <div class="msg-av">🧠</div>
           <div class="msg-bubble">
-            Olá! Sou o <strong>Cérebro Deus</strong> — Claude Sonnet integrado ao seu Google Drive.<br><br>
-            Configure sua API Key acima e conecte o Drive para começar. Depois pode me perguntar qualquer coisa sobre seus arquivos!<br><br>
-            <strong>Exemplos do que posso fazer:</strong><br>
+            Olá! Sou o <strong>Cérebro Deus</strong> com <strong style="color:#4285F4">Gemini 2.0 Flash</strong> integrado ao seu Google Drive.<br><br>
+            Configure sua <strong>Gemini API Key</strong> acima (grátis em <a href="https://aistudio.google.com" target="_blank" style="color:var(--accent)">aistudio.google.com</a>) e conecte o Drive para começar!<br><br>
+            <strong>Exemplos:</strong><br>
             • Listar e analisar seus arquivos<br>
-            • Identificar arquivos com nomes ruins e sugerir novos nomes<br>
-            • Buscar arquivos por tipo, data ou conteúdo do nome<br>
-            • Dar recomendações de organização do Drive
+            • Identificar nomes ruins e sugerir melhorias<br>
+            • Buscar por tipo, data ou nome<br>
+            • Recomendações de organização
           </div>
         </div>
       </div>
@@ -1042,8 +1133,10 @@ const CONFIG = Object.freeze({
   CLIENT_ID: '1028618318283-0b20h0v8an1pcandphv68ra9ouahsuuc.apps.googleusercontent.com',
   SCOPES: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
   PAGE_SIZE: 30,
-  CLAUDE_MODEL: 'claude-sonnet-4-5-20251001',
-  STORAGE_KEY: 'cerebro_deus_apikey',
+
+  GEMINI_MODEL: 'gemini-2.0-flash',
+  GEMINI_URL: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+  STORAGE_KEY: 'cerebro_deus_gemini_key',
 
   BAD_NAME_PATTERNS: [
     /^download/i, /^documento sem nome/i, /^sem título/i,
@@ -1324,10 +1417,28 @@ const UI = {
   },
 
   updateStats(stats) {
-    this.el.statTotal.textContent = stats.total;
-    this.el.statBad.textContent   = stats.bad;
-    this.el.statGood.textContent  = stats.good;
+    const animCount = (el, target) => {
+      const start = parseInt(el.textContent) || 0;
+      const diff  = target - start;
+      if (diff === 0) return;
+      const steps = 20, dur = 400;
+      let i = 0;
+      const t = setInterval(() => {
+        i++;
+        el.textContent = Math.round(start + diff * (i/steps));
+        if (i >= steps) { el.textContent = target; clearInterval(t); }
+      }, dur / steps);
+    };
+    animCount(this.el.statTotal, stats.total);
+    animCount(this.el.statBad,   stats.bad);
+    animCount(this.el.statGood,  stats.good);
     this.el.statsRow.classList.add('visible');
+    // badge ruins
+    const badge = document.getElementById('badCount');
+    if (badge) {
+      badge.textContent = stats.bad;
+      badge.classList.toggle('visible', stats.bad > 0);
+    }
   },
 
   showToolbar() { this.el.toolbar.classList.add('visible'); },
@@ -1349,7 +1460,7 @@ const UI = {
       const isFolder = f.mimeType?.includes('folder');
       const nameAttr = Utils.escAttr(f.name);
       return `
-        <div class="file-row">
+        <div class="file-row ${bad ? 'bad-file' : 'good-file'}">
           <div class="file-name-col">
             <span class="file-icon">${ico}</span>
             <div class="file-info">
@@ -1452,36 +1563,37 @@ const Nav = {
 };
 
 /* ═══════════════════════════════════════
-   CHAT IA — CLAUDE REAL
+   CHAT IA — GEMINI
 ═══════════════════════════════════════ */
 const Chat = {
-  _history: [],   // histórico de mensagens
+  _history: [],
   _busy: false,
+  _userAvatar: '',
 
-  // ── Gerenciar API Key ──
   saveKey() {
     const key = document.getElementById('apiKeyInput').value.trim();
-    if (!key.startsWith('sk-ant-')) {
-      UI.toast('⚠ Key inválida (deve começar com sk-ant-)', 'error');
+    if (!key.startsWith('AIza')) {
+      UI.toast('⚠ Key inválida (deve começar com AIza...)', 'error');
       return;
     }
     localStorage.setItem(CONFIG.STORAGE_KEY, key);
     document.getElementById('apiKeyBar').style.display = 'none';
-    UI.toast('🔑 API Key salva com sucesso!');
-    this._addMsg('ai', '✅ API Key configurada! Agora me pergunte qualquer coisa sobre seus arquivos do Drive.');
+    UI.toast('🔑 Gemini API Key salva!');
+    this._addMsg('ai', '✅ <strong>Gemini conectado!</strong> Agora me pergunte qualquer coisa sobre seus arquivos do Drive.');
   },
 
-  getKey() {
-    return localStorage.getItem(CONFIG.STORAGE_KEY) || '';
-  },
+  getKey() { return localStorage.getItem(CONFIG.STORAGE_KEY) || ''; },
 
-  // ── Mensagens no chat ──
   _addMsg(type, htmlContent) {
     const msgs = document.getElementById('chatMsgs');
-    const av   = type === 'ai' ? '🧠' : '👤';
-    const div  = document.createElement('div');
+    const av   = type === 'ai'
+      ? `<div class="msg-av">🧠</div>`
+      : `<div class="msg-av" style="${this._userAvatar ? `background:url(${this._userAvatar}) center/cover;border:2px solid var(--accent)` : ''}">
+           ${this._userAvatar ? '' : '👤'}
+         </div>`;
+    const div = document.createElement('div');
     div.className = `msg ${type}`;
-    div.innerHTML = `<div class="msg-av">${av}</div><div class="msg-bubble">${htmlContent}</div>`;
+    div.innerHTML = `${av}<div class="msg-bubble">${htmlContent}</div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
     return div;
@@ -1496,45 +1608,37 @@ const Chat = {
     msgs.scrollTop = msgs.scrollHeight;
   },
 
-  _removeTyping() {
-    document.getElementById('chat-typing')?.remove();
-  },
+  _removeTyping() { document.getElementById('chat-typing')?.remove(); },
 
-  // ── Chamar Claude API ──
-  async _callClaude(userMessage) {
+  async _callGemini(userMessage) {
     const apiKey = this.getKey();
-    if (!apiKey) throw new Error('Configure sua API Key primeiro');
+    if (!apiKey) throw new Error('Configure sua Gemini API Key primeiro');
 
-    // Monta system prompt com contexto do Drive
     const driveCtx = State.driveContext();
     const userName = document.getElementById('userName').textContent || 'usuário';
 
-    const systemPrompt = `Você é o Cérebro Deus, um assistente inteligente integrado ao Google Drive de ${userName}.
-Você tem acesso completo aos dados do Drive do usuário (listados abaixo) e deve responder em português brasileiro.
-Seja direto, útil e use emojis com moderação. Quando listar arquivos, use formatação clara.
-Quando sugerir renomear arquivos, use o padrão: AAAA-MM_tipo_descricao.extensao
+    const systemPrompt = `Você é o Cérebro Deus, assistente inteligente integrado ao Google Drive de ${userName}.
+Responda sempre em português brasileiro. Seja direto e use emojis com moderação.
+Quando listar arquivos use formatação clara com • bullets.
+Para sugerir nomes use o padrão: AAAA-MM_tipo_descricao.ext
 
 ${driveCtx}`;
 
-    // Adiciona mensagem ao histórico
-    this._history.push({ role: 'user', content: userMessage });
+    // Monta histórico no formato Gemini
+    const contents = [
+      { role: 'user', parts: [{ text: systemPrompt + '\n\nEntendido, estou pronto para ajudar!' }] },
+      { role: 'model', parts: [{ text: 'Entendido! Estou conectado ao seu Drive e pronto para responder.' }] },
+      ...this._history,
+      { role: 'user', parts: [{ text: userMessage }] },
+    ];
 
-    const body = {
-      model: CONFIG.CLAUDE_MODEL,
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: this._history,
-    };
-
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch(`${CONFIG.GEMINI_URL}?key=${apiKey}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
-      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents,
+        generationConfig: { maxOutputTokens: 1024, temperature: 0.7 },
+      }),
     });
 
     if (!resp.ok) {
@@ -1543,17 +1647,16 @@ ${driveCtx}`;
     }
 
     const data = await resp.json();
-    const assistantText = data.content?.[0]?.text || '(sem resposta)';
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '(sem resposta)';
 
-    // Adiciona resposta ao histórico
-    this._history.push({ role: 'assistant', content: assistantText });
+    // Salva no histórico
+    this._history.push(
+      { role: 'user',  parts: [{ text: userMessage }] },
+      { role: 'model', parts: [{ text }] },
+    );
+    if (this._history.length > 40) this._history = this._history.slice(-36);
 
-    // Limita histórico a 20 turnos para não estourar contexto
-    if (this._history.length > 40) {
-      this._history = this._history.slice(-36);
-    }
-
-    return assistantText;
+    return text;
   },
 
   // ── Enviar mensagem ──
@@ -1579,7 +1682,7 @@ ${driveCtx}`;
     this._addTyping();
 
     try {
-      const response = await this._callClaude(query);
+      const response = await this._callGemini(query);
       this._removeTyping();
       this._addMsg('ai', Utils.mdToHtml(response));
     } catch (e) {
@@ -1612,12 +1715,11 @@ ${driveCtx}`;
   },
 
   init() {
-    // Verifica se já tem key salva
     const savedKey = this.getKey();
     if (savedKey) {
       document.getElementById('apiKeyBar').style.display = 'none';
     } else {
-      document.getElementById('apiKeyInput').placeholder = 'Cole sua API Key: sk-ant-api03-...';
+      document.getElementById('apiKeyInput').placeholder = 'Cole sua Gemini API Key: AIzaSy...';
     }
   },
 };
@@ -1716,6 +1818,7 @@ const App = {
       const user = await Auth.fetchUserInfo();
       UI.showUser(user);
       UI.showToolbar();
+      Chat._userAvatar = user.picture || '';
       await this.loadFiles();
     } catch (e) {
       UI.status(`Erro: ${e.message}`, 'error');
@@ -1725,14 +1828,40 @@ const App = {
   async loadFiles() {
     UI.status('Carregando arquivos do Drive...', 'info', true);
     document.getElementById('btnRefresh').disabled = true;
+    // Skeleton loading
+    const prog = document.getElementById('headerProgress');
+    prog.style.width = '0%'; prog.classList.add('active');
+    const fp = document.getElementById('filesPanel');
+    fp.classList.add('visible');
+    document.getElementById('filesList').innerHTML = [1,2,3,4,5].map(() => `
+      <div class="skeleton-row">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="skeleton" style="width:28px;height:28px;border-radius:6px;flex-shrink:0"></div>
+          <div style="flex:1"><div class="skeleton" style="width:60%;margin-bottom:6px"></div><div class="skeleton" style="width:40%;height:10px"></div></div>
+        </div>
+        <div class="skeleton" style="width:70px"></div>
+        <div class="skeleton" style="width:50px"></div>
+        <div class="skeleton" style="width:60px;margin-left:auto"></div>
+      </div>`).join('');
+    // Anima progresso
+    let pct = 10;
+    const pTimer = setInterval(() => { pct = Math.min(pct + 8, 85); prog.style.width = pct + '%'; }, 200);
     try {
       const files = await DriveAPI.listAll();
+      clearInterval(pTimer);
+      prog.style.width = '100%';
+      setTimeout(() => { prog.classList.remove('active'); prog.style.width = '0%'; }, 400);
       State.setAll(files);
       UI.updateStats(State.stats());
       this._render();
       UI.status(`✅ ${files.length} arquivos carregados`, 'success');
       Chat.updateDriveStatus();
+      // Ativa dot WA se Drive conectado
+      const waDot = document.getElementById('waDot');
+      if (waDot && files.length > 0) waDot.classList.add('on');
     } catch (e) {
+      clearInterval(pTimer);
+      prog.classList.remove('active');
       UI.status(`Erro: ${e.message}`, 'error');
       UI.toast(`⚠ ${e.message}`, 'error');
     } finally {
