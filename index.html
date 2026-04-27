@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-/* ─── DESIGN TOKENS ──────────────────────────────────────────────── */
 :root {
   --bg:          #08080e;
   --surface:     #0f0f1a;
@@ -61,11 +60,9 @@ body::before {
 body::after {
   content: '';
   position: fixed;
-  top: -30vh;
-  left: 50%;
+  top: -30vh; left: 50%;
   transform: translateX(-50%);
-  width: 80vw;
-  height: 60vh;
+  width: 80vw; height: 60vh;
   background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
@@ -79,7 +76,7 @@ body::after {
   padding: 32px 20px 60px;
 }
 
-/* ─── HEADER ──────────────────────────────────────────────────────── */
+/* HEADER */
 .header {
   display: flex;
   align-items: flex-end;
@@ -125,7 +122,7 @@ body::after {
   letter-spacing: 1px;
 }
 
-/* ─── NAV TABS (NOVO) ─────────────────────────────────────────────── */
+/* NAV TABS */
 .nav-tabs {
   display: none;
   gap: 4px;
@@ -161,12 +158,12 @@ body::after {
   border: 1px solid rgba(0,229,255,0.3);
 }
 
-/* ─── PANELS ──────────────────────────────────────────────────────── */
+/* PANELS */
 .panel { display: none; }
 .panel.active { display: block; animation: fadeUp .2s ease; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-/* ─── LOGIN CARD ──────────────────────────────────────────────────── */
+/* LOGIN CARD */
 .login-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -184,19 +181,8 @@ body::after {
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.5;
 }
-.login-card h2 {
-  font-family: var(--display);
-  font-size: 28px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-.login-card p {
-  color: var(--text-2);
-  font-size: 13px;
-  line-height: 1.7;
-  max-width: 320px;
-  margin: 0 auto 32px;
-}
+.login-card h2 { font-family: var(--display); font-size: 28px; letter-spacing: 2px; margin-bottom: 10px; }
+.login-card p { color: var(--text-2); font-size: 13px; line-height: 1.7; max-width: 320px; margin: 0 auto 32px; }
 .btn-google {
   display: inline-flex;
   align-items: center;
@@ -213,10 +199,9 @@ body::after {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .btn-google:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-.btn-google:active { transform: translateY(0); }
 .btn-google img { width: 18px; }
 
-/* ─── USER BAR ────────────────────────────────────────────────────── */
+/* USER BAR */
 .user-bar {
   display: none;
   align-items: center;
@@ -245,7 +230,7 @@ body::after {
 }
 .btn-logout:hover { color: var(--warn); border-color: var(--warn); }
 
-/* ─── STATUS BAR ──────────────────────────────────────────────────── */
+/* STATUS BAR */
 .status-bar {
   display: none;
   align-items: center;
@@ -267,7 +252,7 @@ body::after {
 .status-dot.error   { background: var(--warn); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-/* ─── STATS ───────────────────────────────────────────────────────── */
+/* STATS */
 .stats-row { display: none; gap: 10px; margin-bottom: 16px; }
 .stats-row.visible { display: flex; }
 .stat-card {
@@ -285,7 +270,7 @@ body::after {
 .stat-card.bad   .stat-value { color: var(--warn); }
 .stat-card.good  .stat-value { color: var(--ok); }
 
-/* ─── TOOLBAR ─────────────────────────────────────────────────────── */
+/* TOOLBAR */
 .toolbar { display: none; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
 .toolbar.visible { display: flex; }
 .search-wrap { flex: 1; min-width: 180px; position: relative; }
@@ -320,7 +305,7 @@ body::after {
 .sort-wrap select:focus { border-color: var(--accent); }
 .sort-wrap::after { content:'▾'; position:absolute; right:10px; top:50%; transform:translateY(-50%); color:var(--text-3); pointer-events:none; font-size:10px; }
 
-/* ─── BUTTONS ─────────────────────────────────────────────────────── */
+/* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -342,7 +327,7 @@ body::after {
 .btn-danger  { background: var(--warn-dim); color: var(--warn); border: 1px solid rgba(255,77,109,0.3); }
 .btn-ghost   { background: var(--elevated); color: var(--text-2); border: 1px solid var(--border); }
 
-/* ─── FILES PANEL ─────────────────────────────────────────────────── */
+/* FILES PANEL */
 .files-panel { display: none; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
 .files-panel.visible { display: block; }
 .files-info-bar {
@@ -402,7 +387,7 @@ body::after {
 .action-btn.edit:hover { background: var(--accent-dim); border-color: rgba(0,229,255,0.4); }
 .action-btn.del:hover  { background: var(--warn-dim);   border-color: rgba(255,77,109,0.4); }
 
-/* ─── PAGINATION ──────────────────────────────────────────────────── */
+/* PAGINATION */
 .pagination {
   display: flex;
   align-items: center;
@@ -432,7 +417,7 @@ body::after {
 .empty-state span { font-size: 40px; display: block; margin-bottom: 12px; opacity: 0.6; }
 .empty-state p { font-size: 13px; }
 
-/* ─── CHAT PANEL (NOVO) ───────────────────────────────────────────── */
+/* ═══ CHAT PANEL — CLAUDE IA REAL ═══ */
 .chat-panel {
   background: var(--card);
   border: 1px solid var(--border);
@@ -440,7 +425,7 @@ body::after {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 540px;
+  height: 580px;
 }
 .chat-header {
   display: flex;
@@ -458,6 +443,16 @@ body::after {
 }
 .chat-header-title { font-family: var(--display); font-size: 16px; letter-spacing: 1px; }
 .chat-header-sub   { font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-left: auto; }
+.chat-model-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(0,229,255,0.2);
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
 
 .chat-msgs {
   flex: 1;
@@ -485,24 +480,34 @@ body::after {
   padding: 10px 14px;
   border-radius: 14px;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 .msg.ai   .msg-bubble { background: var(--elevated); border: 1px solid var(--border); border-top-left-radius: 4px; }
 .msg.user .msg-bubble { background: var(--accent-dim); border: 1px solid rgba(0,229,255,0.3); color: var(--accent); border-top-right-radius: 4px; }
 
-.file-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+/* Markdown básico no chat */
+.msg-bubble strong { color: var(--accent); font-weight: 600; }
+.msg-bubble em { color: var(--text-2); font-style: italic; }
+.msg-bubble code {
   background: rgba(0,229,255,0.08);
-  border: 1px solid rgba(0,229,255,0.2);
-  border-radius: 6px;
-  padding: 4px 10px;
-  margin-top: 6px;
+  border: 1px solid rgba(0,229,255,0.15);
+  border-radius: 4px;
+  padding: 1px 5px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--accent);
-  display: block;
+}
+.msg-bubble ul, .msg-bubble ol { padding-left: 18px; margin: 6px 0; }
+.msg-bubble li { margin-bottom: 3px; }
+.msg-bubble p { margin-bottom: 6px; }
+.msg-bubble p:last-child { margin-bottom: 0; }
+
+/* Streaming cursor */
+.streaming-cursor::after {
+  content: '▋';
+  color: var(--accent);
+  animation: blink 0.8s infinite;
+  font-size: 12px;
 }
 
 .typing-bubble { display: flex; gap: 4px; align-items: center; padding: 12px 14px; }
@@ -554,8 +559,52 @@ body::after {
   transition: all .2s;
 }
 .chat-send:hover { opacity: .85; transform: scale(1.05); }
+.chat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-/* ─── WHATSAPP PANEL (NOVO) ───────────────────────────────────────── */
+/* API Key config */
+.api-key-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255,214,10,0.05);
+  border-bottom: 1px solid rgba(255,214,10,0.2);
+}
+.api-key-bar input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid rgba(255,214,10,0.3);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 11px;
+  outline: none;
+}
+.api-key-bar input:focus { border-color: var(--amber); }
+.api-key-bar button {
+  padding: 7px 14px;
+  background: rgba(255,214,10,0.15);
+  color: var(--amber);
+  border: 1px solid rgba(255,214,10,0.3);
+  border-radius: 8px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+}
+.api-key-bar button:hover { background: rgba(255,214,10,0.25); }
+.api-key-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--amber);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* WHATSAPP PANEL */
 .wa-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -573,7 +622,6 @@ body::after {
   gap: 10px;
 }
 .wa-section p { color: var(--text-2); font-size: 13px; line-height: 1.7; margin-bottom: 18px; }
-
 .steps { display: flex; flex-direction: column; gap: 12px; }
 .step  { display: flex; gap: 14px; align-items: flex-start; background: var(--elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
 .step-num {
@@ -601,11 +649,9 @@ body::after {
   white-space: pre-wrap;
   word-break: break-all;
 }
-
 .wa-form { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
 .wa-input {
-  flex: 1;
-  min-width: 200px;
+  flex: 1; min-width: 200px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -630,7 +676,6 @@ body::after {
   transition: all .2s;
 }
 .wa-btn-g:hover { background: #1db954; }
-
 .wa-preview {
   display: none;
   margin-top: 14px;
@@ -651,7 +696,6 @@ body::after {
   color: #d0f0d8;
   white-space: pre-wrap;
 }
-
 .wa-status-row {
   display: flex;
   align-items: center;
@@ -666,7 +710,7 @@ body::after {
 .wa-status-text { font-weight: 600; font-size: 13px; }
 .wa-status-sub  { font-size: 11px; color: var(--text-3); margin-top: 2px; }
 
-/* ─── MODALS ──────────────────────────────────────────────────────── */
+/* MODALS */
 .overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.75);
@@ -716,7 +760,7 @@ body::after {
 .modal-hint    { font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-top: 8px; }
 .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px; }
 
-/* ─── TOAST ───────────────────────────────────────────────────────── */
+/* TOAST */
 .toast-container { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 8px; z-index: 200; }
 .toast {
   display: flex; align-items: center; gap: 8px;
@@ -744,7 +788,6 @@ body::after {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ─── RESPONSIVE ──────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .files-head, .file-row { grid-template-columns: 1fr 70px 100px; }
   .files-head .col-date, .file-date { display: none; }
@@ -762,7 +805,6 @@ body::after {
 
 <div class="app">
 
-  <!-- HEADER -->
   <header class="header">
     <div class="header-brand">
       <div class="brain-icon">🧠</div>
@@ -771,20 +813,18 @@ body::after {
         <div class="header-meta">DRIVE MANAGER · PROJETO LUCAS · ABRIL 2026</div>
       </div>
     </div>
-    <div class="header-version">V 4.0</div>
+    <div class="header-version">V 5.0</div>
   </header>
 
-  <!-- LOGIN -->
   <div class="login-card" id="loginCard">
     <h2>CONECTE SUA CONTA</h2>
-    <p>Autentique com o Google para acessar o Cérebro Deus: Drive, Chat IA e WhatsApp.</p>
+    <p>Autentique com o Google para acessar o Cérebro Deus: Drive, Chat IA com Claude e WhatsApp.</p>
     <button class="btn-google" id="btnSignIn">
       <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="G">
       Entrar com o Google
     </button>
   </div>
 
-  <!-- USER BAR -->
   <div class="user-bar" id="userBar">
     <img class="user-avatar" id="userAvatar" src="" alt="">
     <div>
@@ -794,7 +834,6 @@ body::after {
     <button class="btn-logout" id="btnSignOut">Sair</button>
   </div>
 
-  <!-- NAV TABS -->
   <div class="nav-tabs" id="navTabs">
     <button class="nav-tab active" data-panel="drive" id="tab-drive">📁 Drive</button>
     <button class="nav-tab"        data-panel="chat"  id="tab-chat">💬 Chat IA</button>
@@ -803,13 +842,11 @@ body::after {
 
   <!-- ══════ PANEL: DRIVE ══════ -->
   <div class="panel active" id="panel-drive">
-
     <div class="status-bar" id="statusBar">
       <div class="status-dot" id="statusDot"></div>
-      <div class="spinner"    id="statusSpinner" style="display:none"></div>
+      <div class="spinner" id="statusSpinner" style="display:none"></div>
       <span id="statusMsg"></span>
     </div>
-
     <div class="stats-row" id="statsRow">
       <div class="stat-card total">
         <div class="stat-value" id="statTotal">0</div>
@@ -824,7 +861,6 @@ body::after {
         <div class="stat-label">NOMES OK</div>
       </div>
     </div>
-
     <div class="toolbar" id="toolbar">
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
@@ -840,11 +876,10 @@ body::after {
           <option value="bad-first">Ruins Primeiro</option>
         </select>
       </div>
-      <button class="btn btn-ghost"   id="btnRefresh">↺ Atualizar</button>
-      <button class="btn btn-danger"  id="btnShowBad">⚠ Só ruins</button>
-      <button class="btn btn-ghost"   id="btnShowAll">≡ Todos</button>
+      <button class="btn btn-ghost"  id="btnRefresh">↺ Atualizar</button>
+      <button class="btn btn-danger" id="btnShowBad">⚠ Só ruins</button>
+      <button class="btn btn-ghost"  id="btnShowAll">≡ Todos</button>
     </div>
-
     <div class="files-panel" id="filesPanel">
       <div class="files-info-bar">
         <span class="files-count" id="filesCount"></span>
@@ -859,47 +894,53 @@ body::after {
       <div id="filesList"></div>
       <div class="pagination" id="pagination"></div>
     </div>
-
   </div>
 
-  <!-- ══════ PANEL: CHAT IA ══════ -->
+  <!-- ══════ PANEL: CHAT IA (CLAUDE REAL) ══════ -->
   <div class="panel" id="panel-chat">
     <div class="chat-panel">
       <div class="chat-header">
         <div class="chat-header-dot"></div>
         <div class="chat-header-title">CÉREBRO DEUS IA</div>
-        <div class="chat-header-sub">Pergunte sobre seus arquivos do Drive</div>
+        <div class="chat-model-badge">claude-sonnet-4-5</div>
+        <div class="chat-header-sub" id="chatDriveStatus">Drive não conectado</div>
+      </div>
+
+      <!-- Barra de API Key -->
+      <div class="api-key-bar" id="apiKeyBar">
+        <span class="api-key-label">API KEY</span>
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off">
+        <button onclick="Chat.saveKey()">💾 Salvar</button>
       </div>
 
       <div class="chat-msgs" id="chatMsgs">
         <div class="msg ai">
           <div class="msg-av">🧠</div>
           <div class="msg-bubble">
-            Olá! Estou conectado ao seu Google Drive.<br>
-            Me pergunte qualquer coisa sobre seus arquivos — vou buscar e responder na hora.<br><br>
-            <strong>Exemplos:</strong><br>
-            • "Quais arquivos tenho na pasta financeiro?"<br>
-            • "Busca contratos de vendas"<br>
-            • "Quantos arquivos com nome ruim tenho?"<br>
-            • "Mostra meus arquivos mais recentes"
+            Olá! Sou o <strong>Cérebro Deus</strong> — Claude Sonnet integrado ao seu Google Drive.<br><br>
+            Configure sua API Key acima e conecte o Drive para começar. Depois pode me perguntar qualquer coisa sobre seus arquivos!<br><br>
+            <strong>Exemplos do que posso fazer:</strong><br>
+            • Listar e analisar seus arquivos<br>
+            • Identificar arquivos com nomes ruins e sugerir novos nomes<br>
+            • Buscar arquivos por tipo, data ou conteúdo do nome<br>
+            • Dar recomendações de organização do Drive
           </div>
         </div>
       </div>
 
       <div class="chat-input-row">
         <textarea class="chat-textarea" id="chatInput"
-          placeholder="Pergunte sobre seus arquivos..."
+          placeholder="Pergunte sobre seus arquivos... (Enter para enviar)"
           rows="1"
           onkeydown="Chat.keyDown(event)"
           oninput="Chat.resize(this)"></textarea>
-        <button class="chat-send" onclick="Chat.send()">➤</button>
+        <button class="chat-send" id="chatSendBtn" onclick="Chat.send()">➤</button>
       </div>
     </div>
   </div>
 
   <!-- ══════ PANEL: WHATSAPP ══════ -->
   <div class="panel" id="panel-wa">
-
     <div class="wa-section">
       <h3>📱 Integração WhatsApp</h3>
       <p>Conecte o WhatsApp ao Cérebro Deus e acesse seus arquivos via mensagem. Você envia uma pergunta e o Cérebro responde automaticamente.</p>
@@ -924,7 +965,7 @@ body::after {
           <div class="step-num">3</div>
           <div>
             <h4>Configurar Webhook</h4>
-            <p>No Twilio, configure a URL do backend no campo "When a message comes in". O backend processa e responde.</p>
+            <p>No Twilio, configure a URL do backend no campo "When a message comes in".</p>
             <code>Webhook URL: https://seu-backend.com/whatsapp</code>
           </div>
         </div>
@@ -932,7 +973,7 @@ body::after {
           <div class="step-num">4</div>
           <div>
             <h4>Deploy do Backend (Render.com)</h4>
-            <p>Crie um servidor Node.js gratuito no Render.com. Ele recebe mensagens, busca no Drive e responde.</p>
+            <p>Crie um servidor Node.js gratuito no Render.com. Ele recebe mensagens, busca no Drive e responde com Claude.</p>
             <code>https://render.com → New Web Service → Deploy grátis</code>
           </div>
         </div>
@@ -962,10 +1003,9 @@ body::after {
         </div>
       </div>
     </div>
-
   </div>
 
-</div><!-- /app -->
+</div>
 
 <!-- MODALS -->
 <div class="overlay" id="renameOverlay">
@@ -995,13 +1035,15 @@ body::after {
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    CONFIG
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const CONFIG = Object.freeze({
   CLIENT_ID: '1028618318283-0b20h0v8an1pcandphv68ra9ouahsuuc.apps.googleusercontent.com',
   SCOPES: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
   PAGE_SIZE: 30,
+  CLAUDE_MODEL: 'claude-sonnet-4-5-20251001',
+  STORAGE_KEY: 'cerebro_deus_apikey',
 
   BAD_NAME_PATTERNS: [
     /^download/i, /^documento sem nome/i, /^sem título/i,
@@ -1011,8 +1053,8 @@ const CONFIG = Object.freeze({
   ],
 
   MIME_ICONS: {
-    folder: '📁', pdf: '📕', image: '🖼️', video: '🎥',
-    audio: '🎵', spreadsheet: '📊', presentation: '📊', document: '📝',
+    folder:'📁', pdf:'📕', image:'🖼️', video:'🎥',
+    audio:'🎵', spreadsheet:'📊', presentation:'📊', document:'📝',
   },
 
   EXT_ICONS: {
@@ -1022,14 +1064,14 @@ const CONFIG = Object.freeze({
   },
 });
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    UTILS
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const Utils = {
   isBadName(name) { return CONFIG.BAD_NAME_PATTERNS.some(p => p.test(name)); },
 
-  getIcon(mimeType = '', name = '') {
-    const ext  = name.split('.').pop().toLowerCase();
+  getIcon(mimeType='', name='') {
+    const ext = name.split('.').pop().toLowerCase();
     const mime = mimeType.toLowerCase();
     if (CONFIG.EXT_ICONS[ext]) return CONFIG.EXT_ICONS[ext];
     for (const [key, icon] of Object.entries(CONFIG.MIME_ICONS)) {
@@ -1041,25 +1083,39 @@ const Utils = {
   formatBytes(bytes) {
     if (!bytes) return '—';
     const n = parseInt(bytes, 10);
-    if (n >= 1_073_741_824) return (n / 1_073_741_824).toFixed(1) + ' GB';
-    if (n >= 1_048_576)     return (n / 1_048_576).toFixed(1) + ' MB';
-    if (n >= 1_024)         return (n / 1_024).toFixed(0) + ' KB';
-    return n + ' B';
+    if (n >= 1_073_741_824) return (n/1_073_741_824).toFixed(1)+' GB';
+    if (n >= 1_048_576)     return (n/1_048_576).toFixed(1)+' MB';
+    if (n >= 1_024)         return (n/1_024).toFixed(0)+' KB';
+    return n+' B';
   },
 
   formatDate(iso) {
     if (!iso) return '—';
-    return new Date(iso).toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'2-digit' });
+    return new Date(iso).toLocaleDateString('pt-BR', {day:'2-digit',month:'short',year:'2-digit'});
   },
 
   escAttr(str) {
     return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   },
+
+  // Converte markdown básico em HTML
+  mdToHtml(text) {
+    return text
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`(.+?)`/g, '<code>$1</code>')
+      .replace(/^### (.+)$/gm, '<strong>$1</strong>')
+      .replace(/^## (.+)$/gm, '<strong>$1</strong>')
+      .replace(/^# (.+)$/gm, '<strong>$1</strong>')
+      .replace(/^[\-\*] (.+)$/gm, '• $1')
+      .replace(/\n/g, '<br>');
+  },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    AUTH
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const Auth = (() => {
   let _token = null, _client = null;
 
@@ -1098,9 +1154,9 @@ const Auth = (() => {
   };
 })();
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    DRIVE API
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const DriveAPI = {
   _h() { return { Authorization: `Bearer ${Auth.token}`, 'Content-Type': 'application/json' }; },
 
@@ -1144,9 +1200,9 @@ const DriveAPI = {
   },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    STATE
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const State = (() => {
   let _all = [], _filtered = [], _page = 1, _onlyBad = false, _query = '', _sort = 'name-asc';
 
@@ -1182,20 +1238,54 @@ const State = (() => {
     stats()         { const bad = _all.filter(f => Utils.isBadName(f.name)).length; return { total:_all.length, bad, good:_all.length-bad }; },
     updateFile(id, name) { const f = _all.find(x=>x.id===id); if(f){f.name=name;_compute();} },
     removeFile(id)  { _all = _all.filter(x=>x.id!==id); _compute(); },
+
+    // Gera resumo do Drive para injetar como contexto no Claude
+    driveContext() {
+      if (!_all.length) return 'O usuário ainda não carregou os arquivos do Drive.';
+      const { total, bad, good } = this.stats();
+      const folders = _all.filter(f => f.mimeType?.includes('folder')).length;
+      const recent5 = [..._all]
+        .filter(f => !f.mimeType?.includes('folder'))
+        .sort((a,b) => new Date(b.modifiedTime) - new Date(a.modifiedTime))
+        .slice(0, 5)
+        .map(f => `  - ${f.name} (${Utils.formatBytes(f.size)}, modificado ${Utils.formatDate(f.modifiedTime)})`)
+        .join('\n');
+      const badFiles = _all
+        .filter(f => Utils.isBadName(f.name))
+        .slice(0, 10)
+        .map(f => `  - ${f.name}`)
+        .join('\n');
+      const sample = _all.slice(0, 30).map(f => `  - ${f.name} [${f.mimeType || 'desconhecido'}] ${Utils.formatBytes(f.size)}`).join('\n');
+
+      return `=== DADOS DO GOOGLE DRIVE DO USUÁRIO ===
+Total de itens: ${total}
+Pastas: ${folders}
+Arquivos com nome ruim: ${bad}
+Arquivos com nome OK: ${good}
+
+Arquivos mais recentes:
+${recent5}
+
+Arquivos com nome ruim (para organizar):
+${badFiles || '  (nenhum)'}
+
+Amostra dos arquivos (até 30):
+${sample}
+=== FIM DOS DADOS ===`;
+    },
   };
 })();
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    UI
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const UI = {
   el: {},
 
   init() {
     const ids = [
       'loginCard','userBar','userAvatar','userName','userEmail','btnSignIn','btnSignOut',
-      'navTabs',
-      'statusBar','statusDot','statusSpinner','statusMsg',
+      'navTabs','statusBar','statusDot','statusSpinner','statusMsg',
       'statsRow','statTotal','statBad','statGood',
       'toolbar','searchInput','sortSelect','btnRefresh','btnShowBad','btnShowAll',
       'filesPanel','filesCount','filterLabel','filesList','pagination',
@@ -1206,7 +1296,7 @@ const UI = {
     ids.forEach(id => { this.el[id] = document.getElementById(id); });
   },
 
-  status(msg, type = 'info', loading = false) {
+  status(msg, type='info', loading=false) {
     const { statusBar, statusDot, statusSpinner, statusMsg } = this.el;
     statusBar.className = `status-bar visible ${type}`;
     statusDot.className = `status-dot ${type}`;
@@ -1266,7 +1356,7 @@ const UI = {
               <div class="file-title" title="${nameAttr}">${f.name}</div>
               <div class="file-mime">${f.mimeType || ''}</div>
             </div>
-            <span class="badge ${bad ? 'badge-bad' : 'badge-ok'}">${bad ? '⚠ MAU' : '✓ OK'}</span>
+            <span class="badge ${bad?'badge-bad':'badge-ok'}">${bad?'⚠ MAU':'✓ OK'}</span>
           </div>
           <div class="file-date">${Utils.formatDate(f.modifiedTime)}</div>
           <div class="file-size">${Utils.formatBytes(f.size)}</div>
@@ -1289,7 +1379,7 @@ const UI = {
     const range = (from, to) => {
       let out = '';
       for (let i = from; i <= to; i++) {
-        out += `<button class="page-btn ${i === cur ? 'active' : ''}" data-p="${i}">${i}</button>`;
+        out += `<button class="page-btn ${i===cur?'active':''}" data-p="${i}">${i}</button>`;
       }
       return out;
     };
@@ -1303,7 +1393,7 @@ const UI = {
       const mid = Math.max(3, Math.min(cur-1, total-3));
       html += range(Math.max(3, mid), Math.min(total-2, mid+2));
       if (cur < total-3) html += `<span class="page-info">…</span>`;
-      html += range(Math.max(total-1, 3), total);
+      html += range(Math.max(total-1,3), total);
     }
     html += `<button class="page-btn" data-p="${cur+1}" ${cur===total?'disabled':''}>›</button>`;
     el.innerHTML = html;
@@ -1320,20 +1410,20 @@ const UI = {
   closeAllModals()      { document.querySelectorAll('.overlay').forEach(o => o.classList.remove('open')); },
 
   openRename(id, name) {
-    this.el.renameDesc.innerHTML  = `Renomeando: <strong>${name}</strong>`;
-    this.el.newNameInput.value    = name;
+    this.el.renameDesc.innerHTML = `Renomeando: <strong>${name}</strong>`;
+    this.el.newNameInput.value   = name;
     this.el.btnConfirmRename.dataset.id = id;
     this.openModal('renameOverlay');
     setTimeout(() => this.el.newNameInput.focus(), 120);
   },
 
   openDelete(id, name) {
-    this.el.deleteDesc.innerHTML  = `Excluir permanentemente:<br><strong>${name}</strong>?`;
+    this.el.deleteDesc.innerHTML = `Excluir permanentemente:<br><strong>${name}</strong>?`;
     this.el.btnConfirmDelete.dataset.id = id;
     this.openModal('deleteOverlay');
   },
 
-  toast(msg, type = 'success') {
+  toast(msg, type='success') {
     const t = document.createElement('div');
     t.className = `toast ${type}`;
     t.textContent = msg;
@@ -1343,9 +1433,9 @@ const UI = {
   },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   NAV (NOVO)
-═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
 const Nav = {
   init() {
     document.querySelectorAll('.nav-tab').forEach(btn => {
@@ -1361,17 +1451,37 @@ const Nav = {
   },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   CHAT IA (NOVO)
-   — busca nos arquivos carregados e responde em português
-═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   CHAT IA — CLAUDE REAL
+═══════════════════════════════════════ */
 const Chat = {
-  _addMsg(type, html) {
+  _history: [],   // histórico de mensagens
+  _busy: false,
+
+  // ── Gerenciar API Key ──
+  saveKey() {
+    const key = document.getElementById('apiKeyInput').value.trim();
+    if (!key.startsWith('sk-ant-')) {
+      UI.toast('⚠ Key inválida (deve começar com sk-ant-)', 'error');
+      return;
+    }
+    localStorage.setItem(CONFIG.STORAGE_KEY, key);
+    document.getElementById('apiKeyBar').style.display = 'none';
+    UI.toast('🔑 API Key salva com sucesso!');
+    this._addMsg('ai', '✅ API Key configurada! Agora me pergunte qualquer coisa sobre seus arquivos do Drive.');
+  },
+
+  getKey() {
+    return localStorage.getItem(CONFIG.STORAGE_KEY) || '';
+  },
+
+  // ── Mensagens no chat ──
+  _addMsg(type, htmlContent) {
     const msgs = document.getElementById('chatMsgs');
     const av   = type === 'ai' ? '🧠' : '👤';
     const div  = document.createElement('div');
     div.className = `msg ${type}`;
-    div.innerHTML = `<div class="msg-av">${av}</div><div class="msg-bubble">${html}</div>`;
+    div.innerHTML = `<div class="msg-av">${av}</div><div class="msg-bubble">${htmlContent}</div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
     return div;
@@ -1390,93 +1500,98 @@ const Chat = {
     document.getElementById('chat-typing')?.remove();
   },
 
-  // Busca arquivos pelo nome com base nas palavras da pergunta
-  _search(query) {
-    const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 2);
-    return State.all.filter(f => words.some(w => f.name.toLowerCase().includes(w))).slice(0, 6);
+  // ── Chamar Claude API ──
+  async _callClaude(userMessage) {
+    const apiKey = this.getKey();
+    if (!apiKey) throw new Error('Configure sua API Key primeiro');
+
+    // Monta system prompt com contexto do Drive
+    const driveCtx = State.driveContext();
+    const userName = document.getElementById('userName').textContent || 'usuário';
+
+    const systemPrompt = `Você é o Cérebro Deus, um assistente inteligente integrado ao Google Drive de ${userName}.
+Você tem acesso completo aos dados do Drive do usuário (listados abaixo) e deve responder em português brasileiro.
+Seja direto, útil e use emojis com moderação. Quando listar arquivos, use formatação clara.
+Quando sugerir renomear arquivos, use o padrão: AAAA-MM_tipo_descricao.extensao
+
+${driveCtx}`;
+
+    // Adiciona mensagem ao histórico
+    this._history.push({ role: 'user', content: userMessage });
+
+    const body = {
+      model: CONFIG.CLAUDE_MODEL,
+      max_tokens: 1024,
+      system: systemPrompt,
+      messages: this._history,
+    };
+
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${resp.status}`);
+    }
+
+    const data = await resp.json();
+    const assistantText = data.content?.[0]?.text || '(sem resposta)';
+
+    // Adiciona resposta ao histórico
+    this._history.push({ role: 'assistant', content: assistantText });
+
+    // Limita histórico a 20 turnos para não estourar contexto
+    if (this._history.length > 40) {
+      this._history = this._history.slice(-36);
+    }
+
+    return assistantText;
   },
 
-  // Monta a resposta inteligente baseada na pergunta
-  _buildResponse(query, matches) {
-    const q = query.toLowerCase();
-
-    // Saudação
-    if (/^(oi|olá|ola|bom dia|boa tarde|boa noite|hey|eai)/.test(q)) {
-      const firstName = document.getElementById('userName').textContent.split(' ')[0];
-      return `Olá${firstName ? ', ' + firstName : ''}! 👋 Você tem <strong>${State.all.length} itens</strong> no Drive. O que quer saber?`;
-    }
-
-    // Estatísticas
-    if (/quantos|total|estatística|resumo|overview/.test(q)) {
-      const { total, bad, good } = State.stats();
-      const folders = State.all.filter(f => f.mimeType?.includes('folder')).length;
-      return `📊 <strong>Seu Drive em números:</strong><br><br>
-        • Total de itens: <strong>${total}</strong><br>
-        • Pastas: <strong>${folders}</strong><br>
-        • Arquivos com nome ruim: <strong>${bad}</strong><br>
-        • Arquivos com nome OK: <strong>${good}</strong>`;
-    }
-
-    // Recentes
-    if (/recente|último|nova|novo/.test(q)) {
-      const recent = [...State.all]
-        .filter(f => !f.mimeType?.includes('folder'))
-        .sort((a,b) => new Date(b.modifiedTime) - new Date(a.modifiedTime))
-        .slice(0, 5);
-      const chips = recent.map(f =>
-        `<span class="file-chip">${Utils.getIcon(f.mimeType, f.name)} ${f.name} · ${Utils.formatDate(f.modifiedTime)}</span>`
-      ).join('');
-      return `📅 <strong>Arquivos mais recentes:</strong><br><br>${chips}`;
-    }
-
-    // Ruins
-    if (/ruim|mau|renomear|organiz/.test(q)) {
-      const bad = State.all.filter(f => Utils.isBadName(f.name)).slice(0, 5);
-      if (!bad.length) return '✅ Todos os seus arquivos têm nomes bem organizados!';
-      const chips = bad.map(f =>
-        `<span class="file-chip">⚠ ${f.name}</span>`
-      ).join('');
-      return `⚠ <strong>${State.stats().bad} arquivo(s) com nome ruim:</strong><br><br>${chips}<br><br>Use a aba <strong>Drive</strong> para renomeá-los.`;
-    }
-
-    // Resultados encontrados
-    if (matches.length > 0) {
-      const chips = matches.map(f =>
-        `<span class="file-chip">${Utils.getIcon(f.mimeType, f.name)} ${f.name}${f.size ? ' · ' + Utils.formatBytes(f.size) : ''}</span>`
-      ).join('');
-      return `Encontrei <strong>${matches.length} arquivo(s)</strong> relacionados:<br><br>${chips}`;
-    }
-
-    // Sem resultado
-    return `Não encontrei arquivos relacionados a "<strong>${query}</strong>".<br><br>
-      💡 Tente palavras diferentes ou verifique a aba <strong>Drive</strong>.`;
-  },
-
+  // ── Enviar mensagem ──
   async send() {
+    if (this._busy) return;
+
     const input = document.getElementById('chatInput');
     const query = input.value.trim();
     if (!query) return;
 
+    const apiKey = this.getKey();
+    if (!apiKey) {
+      document.getElementById('apiKeyBar').style.display = 'flex';
+      UI.toast('⚠ Configure sua API Key primeiro', 'error');
+      return;
+    }
+
+    this._busy = true;
     input.value = ''; input.style.height = 'auto';
-    this._addMsg('user', query);
+    document.getElementById('chatSendBtn').disabled = true;
+
+    this._addMsg('user', Utils.escAttr(query).replace(/\n/g,'<br>'));
     this._addTyping();
 
-    await new Promise(r => setTimeout(r, 600 + Math.random() * 500));
-    this._removeTyping();
-
-    if (!Auth.token) {
-      this._addMsg('ai', '⚠️ Faça login com o Google primeiro para eu acessar seus arquivos.');
-      return;
+    try {
+      const response = await this._callClaude(query);
+      this._removeTyping();
+      this._addMsg('ai', Utils.mdToHtml(response));
+    } catch (e) {
+      this._removeTyping();
+      const isKeyError = e.message.includes('401') || e.message.includes('403') || e.message.includes('API Key');
+      this._addMsg('ai', `⚠️ <strong>Erro:</strong> ${Utils.escAttr(e.message)}${isKeyError ? '<br><br>Verifique sua API Key acima.' : ''}`);
+      UI.toast(`⚠ ${e.message}`, 'error');
+    } finally {
+      this._busy = false;
+      document.getElementById('chatSendBtn').disabled = false;
+      document.getElementById('chatInput').focus();
     }
-
-    if (State.all.length === 0) {
-      this._addMsg('ai', '📁 Ainda não carreguei seus arquivos. Vá para a aba <strong>Drive</strong> e clique em Atualizar.');
-      return;
-    }
-
-    const matches  = this._search(query);
-    const response = this._buildResponse(query, matches);
-    this._addMsg('ai', response);
   },
 
   keyDown(e) {
@@ -1487,11 +1602,29 @@ const Chat = {
     el.style.height = 'auto';
     el.style.height = Math.min(el.scrollHeight, 120) + 'px';
   },
+
+  // Atualiza status do Drive no header do chat
+  updateDriveStatus() {
+    const el = document.getElementById('chatDriveStatus');
+    if (!el) return;
+    const n = State.all.length;
+    el.textContent = n > 0 ? `${n} arquivos no contexto` : 'Drive não conectado';
+  },
+
+  init() {
+    // Verifica se já tem key salva
+    const savedKey = this.getKey();
+    if (savedKey) {
+      document.getElementById('apiKeyBar').style.display = 'none';
+    } else {
+      document.getElementById('apiKeyInput').placeholder = 'Cole sua API Key: sk-ant-api03-...';
+    }
+  },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   WHATSAPP (NOVO)
-═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   WHATSAPP
+═══════════════════════════════════════ */
 const WA = {
   simulate() {
     const num     = document.getElementById('waNumber').value.trim();
@@ -1517,13 +1650,14 @@ const WA = {
   },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    APP
-═══════════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const App = {
   async start() {
     UI.init();
     Nav.init();
+    Chat.init();
     this._bindEvents();
   },
 
@@ -1590,18 +1724,19 @@ const App = {
 
   async loadFiles() {
     UI.status('Carregando arquivos do Drive...', 'info', true);
-    el('btnRefresh').disabled = true;
+    document.getElementById('btnRefresh').disabled = true;
     try {
       const files = await DriveAPI.listAll();
       State.setAll(files);
       UI.updateStats(State.stats());
       this._render();
       UI.status(`✅ ${files.length} arquivos carregados`, 'success');
+      Chat.updateDriveStatus();
     } catch (e) {
       UI.status(`Erro: ${e.message}`, 'error');
       UI.toast(`⚠ ${e.message}`, 'error');
     } finally {
-      el('btnRefresh').disabled = false;
+      document.getElementById('btnRefresh').disabled = false;
     }
   },
 
@@ -1621,6 +1756,7 @@ const App = {
       await DriveAPI.rename(id, name);
       State.updateFile(id, name);
       this._render();
+      Chat.updateDriveStatus();
       UI.status('✅ Renomeado com sucesso', 'success');
       UI.toast('✏ Arquivo renomeado!');
     } catch (e) {
@@ -1637,6 +1773,7 @@ const App = {
       await DriveAPI.remove(id);
       State.removeFile(id);
       this._render();
+      Chat.updateDriveStatus();
       UI.status('✅ Arquivo excluído', 'success');
       UI.toast('🗑 Excluído com sucesso');
     } catch (e) {
@@ -1645,9 +1782,6 @@ const App = {
     }
   },
 };
-
-// Helper
-const el = id => document.getElementById(id);
 
 document.addEventListener('DOMContentLoaded', () => App.start());
 </script>
